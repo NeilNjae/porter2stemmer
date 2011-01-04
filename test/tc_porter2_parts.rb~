@@ -1,0 +1,295 @@
+# coding: utf-8
+# Porter stemmer test file
+
+
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
+
+require 'test/unit'
+require 'porter2'
+require 'test_words'
+
+class String
+  public :porter2_preprocess, :porter2_r1, :porter2_r2
+end
+
+class TestPorter2 < Test::Unit::TestCase
+  
+  def test_preprocess
+    assert_equal "abcde", "abcde".porter2_preprocess
+    assert_equal "abcde", "ABCDE".porter2_preprocess
+    assert_equal "ab'cde", "ab‘cde".porter2_preprocess
+    assert_equal "ab'cde", "ab’cde".porter2_preprocess
+    assert_equal "ab'c'de", "ab’c’de".porter2_preprocess
+    assert_equal "ab'c'de", "ab‘c‘de".porter2_preprocess
+    assert_equal "abcde", "''abcde".porter2_preprocess
+    assert_equal "abcde", "’‘abcde".porter2_preprocess
+    assert_equal "ab'c'de", "'ab‘c‘de".porter2_preprocess
+    assert_equal "ab'c'de", "’‘ab‘c‘de".porter2_preprocess
+    assert_equal "Yabc", "yabc".porter2_preprocess
+    assert_equal "aYbc", "aybc".porter2_preprocess
+    assert_equal "abcdeY", "abcdey".porter2_preprocess
+    assert_equal "abaYde", "abayde".porter2_preprocess
+    assert_equal "kabaYde", "kabayde".porter2_preprocess
+  end
+  
+  def test_find_R1
+    assert_equal "iful",  "beautiful".porter2_r1
+    assert_equal "y", "beauty".porter2_r1
+    assert_equal "", "beau".porter2_r1
+    assert_equal "imadversion", "animadversion".porter2_r1
+    assert_equal "kled", "sprinkled".porter2_r1
+    assert_equal "harist", "eucharist".porter2_r1
+    
+    # special cases
+    assert_equal "ate", "generate".porter2_r1
+    assert_equal "ates", "generates".porter2_r1
+    assert_equal "ated", "generated".porter2_r1
+    assert_equal "al", "general".porter2_r1
+    assert_equal "ally", "generally".porter2_r1
+    assert_equal "ic", "generic".porter2_r1
+    assert_equal "ically", "generically".porter2_r1
+    assert_equal "ous", "generous".porter2_r1
+    assert_equal "ously", "generously".porter2_r1
+
+    assert_equal "al", "communal".porter2_r1
+    assert_equal "ity", "community".porter2_r1
+    assert_equal "e", "commune".porter2_r1
+    
+    assert_equal "ic", "arsenic".porter2_r1
+    assert_equal "al", "arsenal".porter2_r1
+  end
+  
+  def test_ends_with_short_syllable?
+    assert_equal true, "rap".porter2_ends_with_short_syllable?
+    assert_equal true, "trap".porter2_ends_with_short_syllable?
+    assert_equal true, "entrap".porter2_ends_with_short_syllable?
+    assert_equal true, "ow".porter2_ends_with_short_syllable? 
+    assert_equal true, "on".porter2_ends_with_short_syllable?
+    assert_equal true, "at".porter2_ends_with_short_syllable?
+    assert_equal false, "uproot".porter2_ends_with_short_syllable? 
+    assert_equal false, "bestow".porter2_ends_with_short_syllable?
+    assert_equal false, "disturb".porter2_ends_with_short_syllable?
+  end
+  
+  def test_is_short_word?
+    short_words = %w[ bed shed shred hop ]
+    long_words = %w[ bead embed beds ]
+    short_words.each do |w|
+      r1 = w.porter2_r1
+      assert_equal true, w.porter2_is_short_word?(r1), 
+	  "#{w} should be short but classified as long"
+    end
+    long_words.each do |w|
+      r1 = w.porter2_r1
+      assert_equal false, w.porter2_is_short_word?(r1), 
+	  "#{w} should be long but classified as short"
+    end
+  end
+  
+  def test_find_R2
+    assert_equal "ul",  "beautiful".porter2_r2
+    assert_equal "", "beauty".porter2_r2
+    assert_equal "", "beau".porter2_r2
+    assert_equal "adversion", "animadversion".porter2_r2
+    assert_equal "", "sprinkled".porter2_r2
+    assert_equal "ist", "eucharist".porter2_r2
+  end
+  
+  def test_step_0
+    assert_equal "abc", "abc".step_0
+    assert_equal "abc", "abc'".step_0
+    assert_equal "abc", "abc's".step_0
+    assert_equal "abc", "abc's'".step_0
+    assert_equal "ab'c", "ab'c".step_0
+    assert_equal "ab'sc", "ab'sc".step_0
+    assert_equal "ab's'c", "ab's'c".step_0
+    assert_equal "ab'sc", "ab'sc's".step_0
+  end
+  
+  def test_step_1a
+    assert_equal "abcde", "abcde".step_1a
+    assert_equal "abcess", "abcesses".step_1a
+    assert_equal "tie", "ties".step_1a
+    assert_equal "tie", "tied".step_1a
+    assert_equal "cri", "cries".step_1a
+    assert_equal "cri", "cried".step_1a
+    assert_equal "gas", "gas".step_1a
+    assert_equal "this", "this".step_1a
+    assert_equal "gap", "gaps".step_1a
+    assert_equal "kiwi", "kiwis".step_1a
+    assert_equal "abacus", "abacus".step_1a
+    assert_equal "abcess", "abcess".step_1a
+  end
+  
+  def test_step_1b
+    assert_equal "abcde", "abcde".step_1b("abcde".porter2_r1)
+    words_non_gb = {"luxuriated" => "luxuriate", "luxuriating" => "luxuriate", 
+             "hopping" => "hop", "hopped" => "hop",
+             "hoped" => "hope", "hoping" => "hope",
+             "atomized" => "atomize", "atomised" => "atomis" }
+    words_non_gb.each do |original, stemmed|
+      assert_equal stemmed, original.step_1b(original.porter2_r1), 
+	  "#{original} should have stemmed to #{stemmed} but got #{original.step_1b(original.porter2_r1)} instead"
+    end
+    words_gb = {"luxuriated" => "luxuriate", "luxuriating" => "luxuriate", 
+             "hopping" => "hop", "hopped" => "hop",
+             "hoped" => "hope", "hoping" => "hope",
+             "atomized" => "atomize", "atomised" => "atomise" }
+    words_gb.each do |original, stemmed|
+      assert_equal stemmed, original.step_1b(original.porter2_r1, true), 
+	  "#{original} should have stemmed to #{stemmed} but got #{original.step_1b(original.porter2_r1)} instead"
+    end
+  end
+  
+  def test_step_1c
+    assert_equal "cri", "cry".step_1c
+    assert_equal "by", "by".step_1c
+    assert_equal "say", "say".step_1c
+  end
+  
+  def test_step_2
+    assert_equal "abc", "abc".step_2
+    
+    assert_equal "nationalize", "nationalization".step_2
+    assert_equal "nationalisate", "nationalisation".step_2
+    assert_equal "nationalize", "nationalization".step_2(true)
+    assert_equal "nationalise", "nationalisation".step_2(true)
+    # Repeat the steps to ensure that the english-gb behaviour isn't sticky
+    assert_equal "nationalize", "nationalization".step_2(false)
+    assert_equal "nationalisate", "nationalisation".step_2(false)
+    assert_equal "nationalize", "nationalization".step_2
+    assert_equal "nationalisate", "nationalisation".step_2
+    
+    assert_equal "nationalize", "nationalizer".step_2
+    assert_equal "nationaliser", "nationaliser".step_2
+    assert_equal "nationalize", "nationalizer".step_2(true)
+    assert_equal "nationalise", "nationaliser".step_2(true)
+    
+    assert_equal "abction", "abctional".step_2
+    assert_equal "abcence", "abcenci".step_2
+    assert_equal "abcance", "abcanci".step_2
+    assert_equal "abcable", "abcabli".step_2
+    assert_equal "abcent", "abcentli".step_2
+    assert_equal "abcize", "abcizer".step_2
+    assert_equal "abcize", "abcization".step_2
+    assert_equal "abcate", "abcational".step_2
+    assert_equal "abcate", "abcation".step_2
+    assert_equal "abcate", "abcator".step_2
+    assert_equal "abcal", "abcalism".step_2
+    assert_equal "abcal", "abcaliti".step_2
+    assert_equal "abcal", "abcalli".step_2
+    assert_equal "abcful", "abcfulness".step_2
+    assert_equal "abcous", "abcousli".step_2
+    assert_equal "abcous", "abcousness".step_2
+    assert_equal "abcive", "abciveness".step_2
+    assert_equal "abcive", "abciviti".step_2
+    assert_equal "abcble", "abcbiliti".step_2
+    assert_equal "abcble", "abcbli".step_2
+    assert_equal "abcful", "abcfulli".step_2
+    assert_equal "abcless", "abclessli".step_2
+    assert_equal "abclog", "abclogi".step_2
+    
+    assert_equal "abc", "abcli".step_2
+    assert_equal "abd", "abdli".step_2
+    assert_equal "abe", "abeli".step_2
+    assert_equal "abg", "abgli".step_2
+    assert_equal "abh", "abhli".step_2
+    assert_equal "abk", "abkli".step_2
+    assert_equal "abm", "abmli".step_2
+    assert_equal "abn", "abnli".step_2
+    assert_equal "abr", "abrli".step_2
+    assert_equal "abt", "abtli".step_2
+    assert_equal "abali", "abali".step_2
+  end
+  
+  def test_step_3
+    assert_equal "abc", "abc".step_3("")
+    
+    assert_equal "national", "nationalize".step_3("alize")
+    assert_equal "nationalise", "nationalise".step_3("alise")
+    assert_equal "national", "nationalise".step_3("alise", true)
+    # Repeat the steps to ensure that the english-gb behaviour isn't sticky
+    assert_equal "national", "nationalize".step_3("alize", false)
+    assert_equal "nationalise", "nationalise".step_3("alise", false)
+    assert_equal "national", "nationalize".step_3("alize")
+    assert_equal "nationalise", "nationalise".step_3("alise")
+    
+    assert_equal "abction", "abctional".step_3("al")
+    assert_equal "abcate", "abcational".step_3("ional")
+    assert_equal "abcic", "abcicate".step_3("ate")
+    assert_equal "abcic", "abciciti".step_3("iti")
+    assert_equal "abcic", "abcical".step_3("al")
+    assert_equal "abc", "abcful".step_3("")
+    assert_equal "abc", "abcness".step_3("")
+    
+    assert_equal "abcabc", "abcabcative".step_3("cative")
+    assert_equal "abcabc", "abcabcative".step_3("cativealic")
+  end
+  
+  def test_step_4
+    assert_equal "abc", "abc".step_4("")
+    
+    assert_equal "nation", "nationize".step_4("ionizeic")
+    assert_equal "nationise", "nationise".step_4("ioniseic")
+    assert_equal "nation", "nationize".step_4("ionizeic", true)
+    assert_equal "nation", "nationise".step_4("ioniseic", true)
+    assert_equal "nation", "nationize".step_4("ionizeic", false)
+    assert_equal "nationise", "nationise".step_4("ioniseic", false)
+    assert_equal "nation", "nationize".step_4("ionizeic")
+    assert_equal "nationise", "nationise".step_4("ioniseic")
+    
+    assert_equal "abc", "abcal".step_4("ionalic")
+    assert_equal "abc", "abcance".step_4("ance")
+    assert_equal "abc", "abcence".step_4("ence")
+    assert_equal "abc", "abcer".step_4("erance")
+    assert_equal "abc", "abcic".step_4("ic")
+    assert_equal "abcer", "abcerable".step_4("erableic")
+    assert_equal "abc", "abcible".step_4("eribleic")
+    assert_equal "abc", "abcant".step_4("ant")
+    assert_equal "abc", "abcement".step_4("ement")	# Check we handle overlapping suffixes properly
+    assert_equal "abce", "abcement".step_4("ment")
+    assert_equal "abc", "abcment".step_4("mentement")
+    assert_equal "abc", "abcment".step_4("ement")
+    assert_equal "abc", "abcent".step_4("ement")
+    assert_equal "abc", "abcent".step_4("ent")
+    assert_equal "abc", "abcism".step_4("ism")
+    assert_equal "abc", "abcate".step_4("ate")
+    assert_equal "abc", "abciti".step_4("ition")
+    assert_equal "abc", "abcous".step_4("ously")
+    assert_equal "abc", "abcive".step_4("ively")
+    assert_equal "abc", "abcize".step_4("ize")
+    assert_equal "abcion", "abcion".step_4("ion")
+    assert_equal "abcs", "abcsion".step_4("sion")
+    assert_equal "abct", "abction".step_4("tion")
+    assert_equal "abction", "abction".step_4("ion")
+    
+    assert_equal "abcal", "abcal".step_4("")	# No removal if suffix isn't in R2
+  end
+  
+  def test_step_5
+    assert_equal "abc", "abc".step_5("", "")
+    
+    assert_equal "abcl", "abcll".step_5("elele", "ele")
+    assert_equal "abcll", "abcll".step_5("ele", "e")
+    
+    assert_equal "abce", "abce".step_5("", "")
+    assert_equal "abc", "abce".step_5("", "ele")
+    assert_equal "abc", "abce".step_5("elele", "")
+  end
+  
+  def test_porter2_postprocess
+    assert_equal "abc", "abc".porter2_postprocess
+    assert_equal "abcy", "abcy".porter2_postprocess
+    assert_equal "abcy", "abcY".porter2_postprocess
+    assert_equal "aybcy", "aYbcY".porter2_postprocess
+    assert_equal "aybcy", "aYbcy".porter2_postprocess
+  end
+  
+  def test_stemmer
+    TEST_WORDS.each do |base, stemmed|
+      assert_equal stemmed, base.stem, 
+	  "#{base} should have stemmed to #{stemmed} but got #{original.stem} instead"
+    end
+  end
+  
+end

@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: Stemmable</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./lib/porter2_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/porter2.rb">lib/porter2.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-porter2_ends_with_short_syllable%3F">#porter2_ends_with_short_syllable?</a></li>
+					
+					<li><a href="#method-i-porter2_is_short_word%3F">#porter2_is_short_word?</a></li>
+					
+					<li><a href="#method-i-porter2_postprocess">#porter2_postprocess</a></li>
+					
+					<li><a href="#method-i-porter2_preprocess">#porter2_preprocess</a></li>
+					
+					<li><a href="#method-i-porter2_r1">#porter2_r1</a></li>
+					
+					<li><a href="#method-i-porter2_r2">#porter2_r2</a></li>
+					
+					<li><a href="#method-i-porter2_stem">#porter2_stem</a></li>
+					
+					<li><a href="#method-i-porter2_stem_verbose">#porter2_stem_verbose</a></li>
+					
+					<li><a href="#method-i-porter2_tidy">#porter2_tidy</a></li>
+					
+					<li><a href="#method-i-stem">#stem</a></li>
+					
+					<li><a href="#method-i-step_0">#step_0</a></li>
+					
+					<li><a href="#method-i-step_1a">#step_1a</a></li>
+					
+					<li><a href="#method-i-step_1b">#step_1b</a></li>
+					
+					<li><a href="#method-i-step_1c">#step_1c</a></li>
+					
+					<li><a href="#method-i-step_2">#step_2</a></li>
+					
+					<li><a href="#method-i-step_3">#step_3</a></li>
+					
+					<li><a href="#method-i-step_4">#step_4</a></li>
+					
+					<li><a href="#method-i-step_5">#step_5</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Stemmable.html">Stemmable</a></li>
+				
+					<li><a href="./String.html">String</a></li>
+				
+					<li><a href="./TestPorter2.html">TestPorter2</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">Stemmable</h1>
+
+		<div id="description">
+			<p>
+Porter stemmer in Ruby.
+</p>
+<p>
+This is the Porter 2 stemming algorithm, as described at  <a
+href="http://snowball.tartarus.org/algorithms/english/stemmer.html">snowball.tartarus.org/algorithms/english/stemmer.html</a>
+The original paper is:
+</p>
+<pre>
+  Porter, 1980, An algorithm for suffix stripping, Program, Vol. 14,
+  no. 3, pp 130-137</pre>
+
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="C">C</a></dt>
+				
+				<dd class="description"><p>
+A non-vowel
+</p></dd>
+				
+			
+				<dt><a name="V">V</a></dt>
+				
+				<dd class="description"><p>
+A vowel
+</p></dd>
+				
+			
+				<dt><a name="CW">CW</a></dt>
+				
+				<dd class="description"><p>
+A non-vowel other than w, x, or Y
+</p></dd>
+				
+			
+				<dt><a name="Double">Double</a></dt>
+				
+				<dd class="description"><p>
+Doubles created when added a suffix: these are undoubled when stemmed
+</p></dd>
+				
+			
+				<dt><a name="Valid_LI">Valid_LI</a></dt>
+				
+				<dd class="description"><p>
+A valid letter that can come before &#8216;li&#8217;
+</p></dd>
+				
+			
+				<dt><a name="SHORT_SYLLABLE">SHORT_SYLLABLE</a></dt>
+				
+				<dd class="description"><p>
+A specification for a short syllable
+</p></dd>
+				
+			
+				<dt><a name="STEP_2_MAPS">STEP_2_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in Step 2. (ogi, li endings dealt with in
+procedure)
+</p></dd>
+				
+			
+				<dt><a name="STEP_3_MAPS">STEP_3_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in Step 3. (ative ending dealt with in
+procedure)  
+</p></dd>
+				
+			
+				<dt><a name="STEP_4_MAPS">STEP_4_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in Step 4.
+</p></dd>
+				
+			
+				<dt><a name="SPECIAL_CASES">SPECIAL_CASES</a></dt>
+				
+				<dd class="description"><p>
+Special-case stemmings 
+</p></dd>
+				
+			
+				<dt><a name="STEP_1A_SPECIAL_CASES">STEP_1A_SPECIAL_CASES</a></dt>
+				
+				<dd class="description"><p>
+Special case words to ignore after step 1a.
+</p></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="porter-ends-with-short-syllable--method" class="method-detail ">
+				<a name="method-i-porter2_ends_with_short_syllable%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_ends_with_short_syllable?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+A short syllable in a word is either 
+</p>
+<ol>
+<li><p>
+a vowel followed by a non-vowel other than w, x or Y and preceded by 
+</p>
+</li>
+</ol>
+<p>
+a non-vowel, or 
+</p>
+<ol>
+<li><p>
+a vowel at the beginning of the word followed by a non-vowel. 
+</p>
+</li>
+</ol>
+					
+
+					
+					<div class="method-source-code"
+						id="porter-ends-with-short-syllable--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 155</span>
+155:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_ends_with_short_syllable?</span>
+156:     <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{SHORT_SYLLABLE}$/</span> <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
+157:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-is-short-word--method" class="method-detail ">
+				<a name="method-i-porter2_is_short_word%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_is_short_word?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+A word is short if it ends in a short syllable, and if R1 is null
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="porter-is-short-word--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 160</span>
+160:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_is_short_word?</span>
+161:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_ends_with_short_syllable?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>.<span class="ruby-identifier">empty?</span>
+162:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-postprocess-method" class="method-detail ">
+				<a name="method-i-porter2_postprocess"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_postprocess</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="porter-postprocess-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 311</span>
+311:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_postprocess</span>
+312:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Y/</span>, <span class="ruby-value str">'y'</span>)
+313:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-preprocess-method" class="method-detail ">
+				<a name="method-i-porter2_preprocess"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_preprocess</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="porter-preprocess-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 122</span>
+122:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_preprocess</span>    
+123:     <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
+124: 
+125:     <span class="ruby-comment cmt"># remove any initial apostrophe</span>
+126:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^'*(.)/</span>, <span class="ruby-value str">'\1'</span>)
+127:     
+128:     <span class="ruby-comment cmt"># set initial y, or y after a vowel, to Y</span>
+129:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^y/</span>, <span class="ruby-value str">&quot;Y&quot;</span>)
+130:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/(#{V})y/</span>, <span class="ruby-value str">'\1Y'</span>)
+131:     
+132:     <span class="ruby-identifier">w</span>
+133:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-r--method" class="method-detail ">
+				<a name="method-i-porter2_r1"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_r1</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+The word after the first non-vowel after the first vowel
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="porter-r--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 136</span>
+136:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r1</span>
+137:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(gener|commun|arsen)(?&lt;r1&gt;.*)/</span>
+138:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>)
+139:     <span class="ruby-keyword kw">else</span>
+140:       <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{V}#{C}(?&lt;r1&gt;.*)$/</span>
+141:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
+142:     <span class="ruby-keyword kw">end</span>
+143:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-r--method" class="method-detail ">
+				<a name="method-i-porter2_r2"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_r2</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+R1 after the first non-vowel after the first vowel
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="porter-r--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 146</span>
+146:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r2</span>
+147:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{V}#{C}(?&lt;r2&gt;.*)$/</span>
+148:     <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r2</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
+149:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-stem-method" class="method-detail ">
+				<a name="method-i-porter2_stem"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_stem</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="porter-stem-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 316</span>
+316:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+317:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
+318:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
+319: 
+320:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
+321:     
+322:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
+323:       <span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
+324:     <span class="ruby-keyword kw">else</span>
+325:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">step_0</span>.<span class="ruby-identifier">step_1a</span>
+326:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span> 
+327:         <span class="ruby-identifier">w1a</span>
+328:       <span class="ruby-keyword kw">else</span>
+329:         <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">step_1b</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">step_1c</span>.<span class="ruby-identifier">step_2</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">step_3</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">step_4</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">step_5</span>.<span class="ruby-identifier">porter2_postprocess</span>
+330:       <span class="ruby-keyword kw">end</span>
+331:     <span class="ruby-keyword kw">end</span>
+332:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+				<div class="aliases">
+					Also aliased as: <a href="Stemmable.html#method-i-stem">stem</a>
+				</div>
+				
+
+				
+			</div>
+
+		
+			<div id="porter-stem-verbose-method" class="method-detail ">
+				<a name="method-i-porter2_stem_verbose"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_stem_verbose</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="porter-stem-verbose-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 334</span>
+334:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem_verbose</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+335:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
+336:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preword: #{preword}&quot;</span>
+337:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
+338: 
+339:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
+340:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preprocessed: #{word}&quot;</span>
+341:     
+342:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
+343:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{word} as special case #{SPECIAL_CASES[word]}&quot;</span>
+344:       <span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
+345:     <span class="ruby-keyword kw">else</span>
+346:       <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r1</span>
+347:       <span class="ruby-identifier">r2</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r2</span>
+348:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;R1 = #{r1}, R2 = #{r2}&quot;</span>
+349:     
+350:       <span class="ruby-identifier">w0</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">step_0</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 0:  #{w0} (R1 = #{w0.porter2_r1}, R2 = #{w0.porter2_r2})&quot;</span>
+351:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">w0</span>.<span class="ruby-identifier">step_1a</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1a: #{w1a} (R1 = #{w1a.porter2_r1}, R2 = #{w1a.porter2_r2})&quot;</span>
+352:       
+353:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span>
+354:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{w1a} as 1a special case&quot;</span>
+355:         <span class="ruby-identifier">w1a</span>
+356:       <span class="ruby-keyword kw">else</span>
+357:         <span class="ruby-identifier">w1b</span> = <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">step_1b</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1b: #{w1b} (R1 = #{w1b.porter2_r1}, R2 = #{w1b.porter2_r2})&quot;</span>
+358:         <span class="ruby-identifier">w1c</span> = <span class="ruby-identifier">w1b</span>.<span class="ruby-identifier">step_1c</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1c: #{w1c} (R1 = #{w1c.porter2_r1}, R2 = #{w1c.porter2_r2})&quot;</span>
+359:         <span class="ruby-identifier">w2</span> = <span class="ruby-identifier">w1c</span>.<span class="ruby-identifier">step_2</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 2:  #{w2} (R1 = #{w2.porter2_r1}, R2 = #{w2.porter2_r2})&quot;</span>
+360:         <span class="ruby-identifier">w3</span> = <span class="ruby-identifier">w2</span>.<span class="ruby-identifier">step_3</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 3:  #{w3} (R1 = #{w3.porter2_r1}, R2 = #{w3.porter2_r2})&quot;</span>
+361:         <span class="ruby-identifier">w4</span> = <span class="ruby-identifier">w3</span>.<span class="ruby-identifier">step_4</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 4:  #{w4} (R1 = #{w4.porter2_r1}, R2 = #{w4.porter2_r2})&quot;</span>
+362:         <span class="ruby-identifier">w5</span> = <span class="ruby-identifier">w4</span>.<span class="ruby-identifier">step_5</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 5:  #{w5}&quot;</span>
+363:         <span class="ruby-identifier">wpost</span> = <span class="ruby-identifier">w5</span>.<span class="ruby-identifier">porter2_postprocess</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After postprocess: #{wpost}&quot;</span>
+364:         <span class="ruby-identifier">wpost</span>
+365:       <span class="ruby-keyword kw">end</span>
+366:     <span class="ruby-keyword kw">end</span>
+367:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="porter-tidy-method" class="method-detail ">
+				<a name="method-i-porter2_tidy"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">porter2_tidy</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Tidy up the word before we get down to the algorithm
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="porter-tidy-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 112</span>
+112:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_tidy</span>
+113:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>
+114:     
+115:     <span class="ruby-comment cmt"># map apostrophe-like characters to apostrophes</span>
+116:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/‘/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
+117:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/’/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
+118: 
+119:     <span class="ruby-identifier">preword</span>
+120:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="stem-method" class="method-detail method-alias">
+				<a name="method-i-stem"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">stem</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+				</div>
+
+				
+
+				
+				<div class="aliases">
+          Alias for: <a href="Stemmable.html#method-i-porter2_stem">porter2_stem</a>
+				</div>
+				
+			</div>
+
+		
+			<div id="step--method" class="method-detail ">
+				<a name="method-i-step_0"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_0</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Search for the longest among the suffixes, 
+</p>
+<ul>
+<li><p>
+&#8217;
+</p>
+</li>
+<li><p>
+&#8217;s
+</p>
+</li>
+<li><p>
+&#8217;s&#8217;
+</p>
+</li>
+</ul>
+<p>
+and remove if found.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="step--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 169</span>
+169:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_0</span>
+170:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(.)('s'|'s|')$/</span>, <span class="ruby-value str">'\1'</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>
+171:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step-a-method" class="method-detail ">
+				<a name="method-i-step_1a"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_1a</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remove plural suffixes
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="step-a-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 174</span>
+174:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_1a</span>
+175:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/sses$/</span>
+176:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/sses$/</span>, <span class="ruby-value str">'ss'</span>)
+177:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/..(ied|ies)$/</span>
+178:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'i'</span>)
+179:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(ied|ies)$/</span>
+180:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'ie'</span>)
+181:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(us|ss)$/</span>
+182:       <span class="ruby-keyword kw">self</span>
+183:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/s$/</span>
+184:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{V}.+)s$/</span>
+185:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/s$/</span>, <span class="ruby-value str">''</span>) 
+186:       <span class="ruby-keyword kw">else</span>
+187:         <span class="ruby-keyword kw">self</span>
+188:       <span class="ruby-keyword kw">end</span>
+189:     <span class="ruby-keyword kw">else</span>
+190:       <span class="ruby-keyword kw">self</span>
+191:     <span class="ruby-keyword kw">end</span>
+192:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step-b-method" class="method-detail ">
+				<a name="method-i-step_1b"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_1b</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step-b-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 194</span>
+194:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_1b</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+195:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
+196:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
+197:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(eed|eedly)$/</span>, <span class="ruby-value str">'ee'</span>)
+198:       <span class="ruby-keyword kw">else</span>
+199:         <span class="ruby-keyword kw">self</span>
+200:       <span class="ruby-keyword kw">end</span>
+201:     <span class="ruby-keyword kw">else</span>
+202:       <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
+203:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{V}.*(ed|edly|ing|ingly)$/</span>
+204:         <span class="ruby-identifier">w</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(ed|edly|ing|ingly)$/</span>, <span class="ruby-value str">''</span>)
+205:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(at|lb|iz)$/</span>
+206:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
+207:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/is$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">gb_english</span>
+208:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
+209:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Double}$/</span>
+210:           <span class="ruby-identifier">w</span>.<span class="ruby-identifier">chop!</span>
+211:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">porter2_is_short_word?</span>
+212:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span>
+213:         <span class="ruby-keyword kw">end</span>
+214:       <span class="ruby-keyword kw">end</span>
+215:       <span class="ruby-identifier">w</span>
+216:     <span class="ruby-keyword kw">end</span>
+217:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step-c-method" class="method-detail ">
+				<a name="method-i-step_1c"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_1c</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step-c-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 220</span>
+220:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_1c</span>
+221:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/.+#{C}(y|Y)$/</span>
+222:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(y|Y)$/</span>, <span class="ruby-value str">'i'</span>)
+223:     <span class="ruby-keyword kw">else</span>
+224:       <span class="ruby-keyword kw">self</span>
+225:     <span class="ruby-keyword kw">end</span>
+226:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step--method" class="method-detail ">
+				<a name="method-i-step_2"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_2</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 229</span>
+229:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_2</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+230:     <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+231:     <span class="ruby-identifier">s2m</span> = <span class="ruby-constant">STEP_2_MAPS</span>.<span class="ruby-identifier">dup</span>
+232:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+233:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;iser&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
+234:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;isation&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
+235:     <span class="ruby-keyword kw">end</span>
+236:     <span class="ruby-identifier">step_2_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s2m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+237:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_2_re</span>
+238:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span>
+239:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s2m</span>[<span class="ruby-node">$&amp;</span>])
+240:       <span class="ruby-keyword kw">else</span>
+241:         <span class="ruby-keyword kw">self</span>
+242:       <span class="ruby-keyword kw">end</span>
+243:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/li$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{Valid_LI})li$/</span>
+244:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/li$/</span>, <span class="ruby-value str">''</span>)
+245:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ogi$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/logi$/</span>
+246:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ogi$/</span>, <span class="ruby-value str">'og'</span>)
+247:     <span class="ruby-keyword kw">else</span>
+248:       <span class="ruby-keyword kw">self</span>
+249:     <span class="ruby-keyword kw">end</span>
+250:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step--method" class="method-detail ">
+				<a name="method-i-step_3"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_3</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 253</span>
+253:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_3</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+254:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span>
+255:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ative$/</span>, <span class="ruby-value str">''</span>)
+256:     <span class="ruby-keyword kw">else</span>
+257:       <span class="ruby-identifier">s3m</span> = <span class="ruby-constant">STEP_3_MAPS</span>.<span class="ruby-identifier">dup</span>
+258:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+259:         <span class="ruby-identifier">s3m</span>[<span class="ruby-value str">&quot;alise&quot;</span>] = <span class="ruby-value str">&quot;al&quot;</span>
+260:       <span class="ruby-keyword kw">end</span>
+261:       <span class="ruby-identifier">step_3_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s3m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+262:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+263:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_3_re</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span> 
+264:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s3m</span>[<span class="ruby-node">$&amp;</span>])
+265:       <span class="ruby-keyword kw">else</span>
+266:         <span class="ruby-keyword kw">self</span>
+267:       <span class="ruby-keyword kw">end</span>
+268:     <span class="ruby-keyword kw">end</span>
+269:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step--method" class="method-detail ">
+				<a name="method-i-step_4"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_4</span><span
+						class="method-args">(gb_english = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 272</span>
+272:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_4</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+273:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ion$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(s|t)ion$/</span>
+274:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ion$/</span>, <span class="ruby-value str">''</span>)
+275:     <span class="ruby-keyword kw">else</span>
+276:       <span class="ruby-identifier">s4m</span> = <span class="ruby-constant">STEP_4_MAPS</span>.<span class="ruby-identifier">dup</span>
+277:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+278:         <span class="ruby-identifier">s4m</span>[<span class="ruby-value str">&quot;ise&quot;</span>] = <span class="ruby-value str">&quot;&quot;</span>
+279:       <span class="ruby-keyword kw">end</span>
+280:       <span class="ruby-identifier">step_4_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s4m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+281:       <span class="ruby-identifier">r2</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span>
+282:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_4_re</span>
+283:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r2</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}/</span>
+284:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s4m</span>[<span class="ruby-node">$&amp;</span>])
+285:         <span class="ruby-keyword kw">else</span>
+286:           <span class="ruby-keyword kw">self</span>
+287:         <span class="ruby-keyword kw">end</span>
+288:       <span class="ruby-keyword kw">else</span>
+289:         <span class="ruby-keyword kw">self</span>
+290:       <span class="ruby-keyword kw">end</span>
+291:     <span class="ruby-keyword kw">end</span>
+292:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="step--method" class="method-detail ">
+				<a name="method-i-step_5"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">step_5</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="step--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/porter2.rb, line 295</span>
+295:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_5</span>
+296:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ll$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/l$/</span>
+297:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ll$/</span>, <span class="ruby-value str">'l'</span>) 
+298:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> 
+299:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>) 
+300:     <span class="ruby-keyword kw">else</span>
+301:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+302:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{SHORT_SYLLABLE}e$/</span>
+303:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>)
+304:       <span class="ruby-keyword kw">else</span>
+305:         <span class="ruby-keyword kw">self</span>
+306:       <span class="ruby-keyword kw">end</span>
+307:     <span class="ruby-keyword kw">end</span>
+308:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
