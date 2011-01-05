@@ -8,12 +8,9 @@ $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 require 'test/unit'
 require 'porter2'
 
-class String
-  public :porter2_preprocess, :porter2_r1, :porter2_r2
-end
-
 class TestPorter2 < Test::Unit::TestCase
-  
+
+# The full set of test words from  http://snowball.tartarus.org/algorithms/english/stemmer.html 
 TEST_WORDS = {"'" => "'",
               "''" => "''",
               "'a" => "'a",
@@ -29431,6 +29428,7 @@ TEST_WORDS = {"'" => "'",
               "zossimov" => "zossimov",
               "zu" => "zu" }
 
+# Test words with -ise suffixes (and similar), to test how British English is stemmed
 TEST_WORDS_ENGB = { "aggrandisement" => "aggrandis",
               "agonising" => "agon",
               "anathematising" => "anathemat",
