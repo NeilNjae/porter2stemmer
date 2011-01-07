@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'porter2_module'
+require 'porter2_constants'
 
 # ==The Porter 2 stemmer
 #
