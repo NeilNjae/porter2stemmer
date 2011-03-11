@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./lib/porter2_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/porter2.rb">lib/porter2.rb</a></li>
+						<li><a href="./lib/porter2_implementation_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/porter2_implementation.rb">lib/porter2_implementation.rb</a></li>
 					
 					</ul>
 				</div>
@@ -116,6 +116,15 @@
 		<div id="project-metadata">
 			
 			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./Readme_rdoc.html">Readme.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
 
 			<div id="classindex-section" class="section project-section">
 				<h3 class="section-header">Class Index
@@ -150,45 +159,10 @@
 		<h1 class="class">String</h1>
 
 		<div id="description">
-			<h2>The Porter 2 stemmer</h2>
-<p>
-This is the Porter 2 stemming algorithm, as described at  <a
-href="http://snowball.tartarus.org/algorithms/english/stemmer.html">snowball.tartarus.org/algorithms/english/stemmer.html</a>
-The original paper is:
-</p>
-<p>
-Porter, 1980, &#8220;An algorithm for suffix stripping&#8221;,
-<em>Program</em>, Vol. 14, no. 3, pp 130-137
-</p>
-<p>
-Constants for the stemmer are in the <a href="Porter2.html">Porter2</a>
-module.
-</p>
-<p>
-Procedures that implement the stemmer are added to the <a
-href="String.html">String</a> class.
-</p>
-<p>
-The stemmer algorithm is implemented in the <a
-href="String.html#method-i-porter2_stem">porter2_stem</a> procedure.
-</p>
-<h2>Internationalisation</h2>
-<p>
-There isn&#8217;t much, as this is a stemmer that only works for English.
-</p>
-<p>
-The <tt>gb_english</tt> flag to the various procedures allows the stemmer
-to treat the British  English &#8217;-ise&#8217; the same as the American
-English &#8217;-ize&#8217;.
-</p>
-<h2>Longest suffixes</h2>
-<p>
-Several places in the algorithm require matching the longest suffix of a
-word. The  regexp engine in Ruby 1.9 seems to handle alterntives in regexps
-by finding the  alternative that matches at the first position in the
-string. As we&#8217;re only talking  about suffixes, that first match is
-also the longest suffix. If the regexp engine changes, this behaviour may
-change and break the stemmer.
+			<p>
+Implementation of the Porter 2 stemmer. <a
+href="String.html#method-i-porter2_stem">String#porter2_stem</a> is the
+main stemming procedure.
 </p>
 
 		</div>
@@ -227,10 +201,10 @@ Returns true if the word ends with a short syllable
 					<div class="method-source-code"
 						id="porter-ends-with-short-syllable--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 87</span>
-87:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_ends_with_short_syllable?</span>
-88:     <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::SHORT_SYLLABLE}$/</span> <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
-89:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 59</span>
+59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_ends_with_short_syllable?</span>
+60:     <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::SHORT_SYLLABLE}$/</span> <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
+61:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -263,10 +237,10 @@ A word is short if it ends in a short syllable, and R1 is null
 					<div class="method-source-code"
 						id="porter-is-short-word--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 93</span>
-93:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_is_short_word?</span>
-94:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_ends_with_short_syllable?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>.<span class="ruby-identifier">empty?</span>
-95:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 65</span>
+65:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_is_short_word?</span>
+66:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_ends_with_short_syllable?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>.<span class="ruby-identifier">empty?</span>
+67:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -299,10 +273,10 @@ Turn all Y letters into y
 					<div class="method-source-code"
 						id="porter-postprocess-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 289</span>
-289:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_postprocess</span>
-290:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Y/</span>, <span class="ruby-value str">'y'</span>)
-291:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 261</span>
+261:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_postprocess</span>
+262:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Y/</span>, <span class="ruby-value str">'y'</span>)
+263:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -343,19 +317,19 @@ doesn&#8217;t do that.)
 					<div class="method-source-code"
 						id="porter-preprocess-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 53</span>
-53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_preprocess</span>    
-54:     <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
-55: 
-56:     <span class="ruby-comment cmt"># remove any initial apostrophe</span>
-57:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^'*(.)/</span>, <span class="ruby-value str">'\1'</span>)
-58:     
-59:     <span class="ruby-comment cmt"># set initial y, or y after a vowel, to Y</span>
-60:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^y/</span>, <span class="ruby-value str">&quot;Y&quot;</span>)
-61:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/(#{Porter2::V})y/</span>, <span class="ruby-value str">'\1Y'</span>)
-62:     
-63:     <span class="ruby-identifier">w</span>
-64:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 25</span>
+25:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_preprocess</span>    
+26:     <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
+27: 
+28:     <span class="ruby-comment cmt"># remove any initial apostrophe</span>
+29:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^'*(.)/</span>, <span class="ruby-value str">'\1'</span>)
+30:     
+31:     <span class="ruby-comment cmt"># set initial y, or y after a vowel, to Y</span>
+32:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^y/</span>, <span class="ruby-value str">&quot;Y&quot;</span>)
+33:     <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/(#{Porter2::V})y/</span>, <span class="ruby-value str">'\1Y'</span>)
+34:     
+35:     <span class="ruby-identifier">w</span>
+36:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -390,15 +364,15 @@ and &#8216;arsen-&#8217; treated as special cases
 					<div class="method-source-code"
 						id="porter-r--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 69</span>
-69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r1</span>
-70:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(gener|commun|arsen)(?&lt;r1&gt;.*)/</span>
-71:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>)
-72:     <span class="ruby-keyword kw">else</span>
-73:       <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}#{Porter2::C}(?&lt;r1&gt;.*)$/</span>
-74:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
-75:     <span class="ruby-keyword kw">end</span>
-76:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 41</span>
+41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r1</span>
+42:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(gener|commun|arsen)(?&lt;r1&gt;.*)/</span>
+43:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>)
+44:     <span class="ruby-keyword kw">else</span>
+45:       <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}#{Porter2::C}(?&lt;r1&gt;.*)$/</span>
+46:       <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r1</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
+47:     <span class="ruby-keyword kw">end</span>
+48:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -433,11 +407,11 @@ non-vowel after the first vowel
 					<div class="method-source-code"
 						id="porter-r--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 80</span>
-80:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r2</span>
-81:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}#{Porter2::C}(?&lt;r2&gt;.*)$/</span>
-82:     <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r2</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
-83:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_r2</span>
+53:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}#{Porter2::C}(?&lt;r2&gt;.*)$/</span>
+54:     <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">:r2</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&quot;</span>
+55:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -472,24 +446,24 @@ English.
 					<div class="method-source-code"
 						id="porter-stem-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 297</span>
-297:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-298:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
-299:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
-300: 
-301:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
-302:     
-303:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
-304:       <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
-305:     <span class="ruby-keyword kw">else</span>
-306:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_step0</span>.<span class="ruby-identifier">porter2_step1a</span>
-307:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span> 
-308:         <span class="ruby-identifier">w1a</span>
-309:       <span class="ruby-keyword kw">else</span>
-310:         <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step1c</span>.<span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step5</span>.<span class="ruby-identifier">porter2_postprocess</span>
-311:       <span class="ruby-keyword kw">end</span>
-312:     <span class="ruby-keyword kw">end</span>
-313:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 269</span>
+269:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+270:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
+271:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
+272: 
+273:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
+274:     
+275:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
+276:       <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
+277:     <span class="ruby-keyword kw">else</span>
+278:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_step0</span>.<span class="ruby-identifier">porter2_step1a</span>
+279:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span> 
+280:         <span class="ruby-identifier">w1a</span>
+281:       <span class="ruby-keyword kw">else</span>
+282:         <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step1c</span>.<span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span>).<span class="ruby-identifier">porter2_step5</span>.<span class="ruby-identifier">porter2_postprocess</span>
+283:       <span class="ruby-keyword kw">end</span>
+284:     <span class="ruby-keyword kw">end</span>
+285:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -528,41 +502,41 @@ output of each stage to STDOUT
 					<div class="method-source-code"
 						id="porter-stem-verbose-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 316</span>
-316:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem_verbose</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-317:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
-318:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preword: #{preword}&quot;</span>
-319:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
-320: 
-321:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
-322:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preprocessed: #{word}&quot;</span>
-323:     
-324:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
-325:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{word} as special case #{Porter2::SPECIAL_CASES[word]}&quot;</span>
-326:       <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
-327:     <span class="ruby-keyword kw">else</span>
-328:       <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r1</span>
-329:       <span class="ruby-identifier">r2</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r2</span>
-330:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;R1 = #{r1}, R2 = #{r2}&quot;</span>
-331:     
-332:       <span class="ruby-identifier">w0</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_step0</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 0:  #{w0} (R1 = #{w0.porter2_r1}, R2 = #{w0.porter2_r2})&quot;</span>
-333:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">w0</span>.<span class="ruby-identifier">porter2_step1a</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1a: #{w1a} (R1 = #{w1a.porter2_r1}, R2 = #{w1a.porter2_r2})&quot;</span>
-334:       
-335:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span>
-336:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{w1a} as 1a special case&quot;</span>
-337:         <span class="ruby-identifier">w1a</span>
-338:       <span class="ruby-keyword kw">else</span>
-339:         <span class="ruby-identifier">w1b</span> = <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1b: #{w1b} (R1 = #{w1b.porter2_r1}, R2 = #{w1b.porter2_r2})&quot;</span>
-340:         <span class="ruby-identifier">w1c</span> = <span class="ruby-identifier">w1b</span>.<span class="ruby-identifier">porter2_step1c</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1c: #{w1c} (R1 = #{w1c.porter2_r1}, R2 = #{w1c.porter2_r2})&quot;</span>
-341:         <span class="ruby-identifier">w2</span> = <span class="ruby-identifier">w1c</span>.<span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 2:  #{w2} (R1 = #{w2.porter2_r1}, R2 = #{w2.porter2_r2})&quot;</span>
-342:         <span class="ruby-identifier">w3</span> = <span class="ruby-identifier">w2</span>.<span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 3:  #{w3} (R1 = #{w3.porter2_r1}, R2 = #{w3.porter2_r2})&quot;</span>
-343:         <span class="ruby-identifier">w4</span> = <span class="ruby-identifier">w3</span>.<span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 4:  #{w4} (R1 = #{w4.porter2_r1}, R2 = #{w4.porter2_r2})&quot;</span>
-344:         <span class="ruby-identifier">w5</span> = <span class="ruby-identifier">w4</span>.<span class="ruby-identifier">porter2_step5</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 5:  #{w5}&quot;</span>
-345:         <span class="ruby-identifier">wpost</span> = <span class="ruby-identifier">w5</span>.<span class="ruby-identifier">porter2_postprocess</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After postprocess: #{wpost}&quot;</span>
-346:         <span class="ruby-identifier">wpost</span>
-347:       <span class="ruby-keyword kw">end</span>
-348:     <span class="ruby-keyword kw">end</span>
-349:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 288</span>
+288:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_stem_verbose</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+289:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_tidy</span>
+290:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preword: #{preword}&quot;</span>
+291:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">preword</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span>
+292: 
+293:     <span class="ruby-identifier">word</span> = <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">porter2_preprocess</span>
+294:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Preprocessed: #{word}&quot;</span>
+295:     
+296:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">word</span>
+297:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{word} as special case #{Porter2::SPECIAL_CASES[word]}&quot;</span>
+298:       <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">SPECIAL_CASES</span>[<span class="ruby-identifier">word</span>]
+299:     <span class="ruby-keyword kw">else</span>
+300:       <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r1</span>
+301:       <span class="ruby-identifier">r2</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_r2</span>
+302:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;R1 = #{r1}, R2 = #{r2}&quot;</span>
+303:     
+304:       <span class="ruby-identifier">w0</span> = <span class="ruby-identifier">word</span>.<span class="ruby-identifier">porter2_step0</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 0:  #{w0} (R1 = #{w0.porter2_r1}, R2 = #{w0.porter2_r2})&quot;</span>
+305:       <span class="ruby-identifier">w1a</span> = <span class="ruby-identifier">w0</span>.<span class="ruby-identifier">porter2_step1a</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1a: #{w1a} (R1 = #{w1a.porter2_r1}, R2 = #{w1a.porter2_r2})&quot;</span>
+306:       
+307:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_1A_SPECIAL_CASES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">w1a</span>
+308:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning #{w1a} as 1a special case&quot;</span>
+309:         <span class="ruby-identifier">w1a</span>
+310:       <span class="ruby-keyword kw">else</span>
+311:         <span class="ruby-identifier">w1b</span> = <span class="ruby-identifier">w1a</span>.<span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1b: #{w1b} (R1 = #{w1b.porter2_r1}, R2 = #{w1b.porter2_r2})&quot;</span>
+312:         <span class="ruby-identifier">w1c</span> = <span class="ruby-identifier">w1b</span>.<span class="ruby-identifier">porter2_step1c</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 1c: #{w1c} (R1 = #{w1c.porter2_r1}, R2 = #{w1c.porter2_r2})&quot;</span>
+313:         <span class="ruby-identifier">w2</span> = <span class="ruby-identifier">w1c</span>.<span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 2:  #{w2} (R1 = #{w2.porter2_r1}, R2 = #{w2.porter2_r2})&quot;</span>
+314:         <span class="ruby-identifier">w3</span> = <span class="ruby-identifier">w2</span>.<span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 3:  #{w3} (R1 = #{w3.porter2_r1}, R2 = #{w3.porter2_r2})&quot;</span>
+315:         <span class="ruby-identifier">w4</span> = <span class="ruby-identifier">w3</span>.<span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span>) ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 4:  #{w4} (R1 = #{w4.porter2_r1}, R2 = #{w4.porter2_r2})&quot;</span>
+316:         <span class="ruby-identifier">w5</span> = <span class="ruby-identifier">w4</span>.<span class="ruby-identifier">porter2_step5</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After step 5:  #{w5}&quot;</span>
+317:         <span class="ruby-identifier">wpost</span> = <span class="ruby-identifier">w5</span>.<span class="ruby-identifier">porter2_postprocess</span> ; <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;After postprocess: #{wpost}&quot;</span>
+318:         <span class="ruby-identifier">wpost</span>
+319:       <span class="ruby-keyword kw">end</span>
+320:     <span class="ruby-keyword kw">end</span>
+321:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -612,10 +586,10 @@ and remove if found.
 					<div class="method-source-code"
 						id="porter-step--source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 103</span>
-103:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step0</span>
-104:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(.)('s'|'s|')$/</span>, <span class="ruby-value str">'\1'</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>
-105:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 75</span>
+75:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step0</span>
+76:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(.)('s'|'s|')$/</span>, <span class="ruby-value str">'\1'</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>
+77:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -668,26 +642,26 @@ do nothing
 					<div class="method-source-code"
 						id="porter-step-a-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 113</span>
-113:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1a</span>
-114:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/sses$/</span>
-115:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/sses$/</span>, <span class="ruby-value str">'ss'</span>)
-116:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/..(ied|ies)$/</span>
-117:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'i'</span>)
-118:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(ied|ies)$/</span>
-119:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'ie'</span>)
-120:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(us|ss)$/</span>
-121:       <span class="ruby-keyword kw">self</span>
-122:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/s$/</span>
-123:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{Porter2::V}.+)s$/</span>
-124:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/s$/</span>, <span class="ruby-value str">''</span>) 
-125:       <span class="ruby-keyword kw">else</span>
-126:         <span class="ruby-keyword kw">self</span>
-127:       <span class="ruby-keyword kw">end</span>
-128:     <span class="ruby-keyword kw">else</span>
-129:       <span class="ruby-keyword kw">self</span>
-130:     <span class="ruby-keyword kw">end</span>
-131:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 85</span>
+ 85:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1a</span>
+ 86:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/sses$/</span>
+ 87:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/sses$/</span>, <span class="ruby-value str">'ss'</span>)
+ 88:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/..(ied|ies)$/</span>
+ 89:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'i'</span>)
+ 90:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(ied|ies)$/</span>
+ 91:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(ied|ies)$/</span>, <span class="ruby-value str">'ie'</span>)
+ 92:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(us|ss)$/</span>
+ 93:       <span class="ruby-keyword kw">self</span>
+ 94:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/s$/</span>
+ 95:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{Porter2::V}.+)s$/</span>
+ 96:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/s$/</span>, <span class="ruby-value str">''</span>) 
+ 97:       <span class="ruby-keyword kw">else</span>
+ 98:         <span class="ruby-keyword kw">self</span>
+ 99:       <span class="ruby-keyword kw">end</span>
+100:     <span class="ruby-keyword kw">else</span>
+101:       <span class="ruby-keyword kw">self</span>
+102:     <span class="ruby-keyword kw">end</span>
+103:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -754,31 +728,31 @@ if the word is short: add e
 					<div class="method-source-code"
 						id="porter-step-b-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 143</span>
-143:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-144:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
-145:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
-146:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(eed|eedly)$/</span>, <span class="ruby-value str">'ee'</span>)
-147:       <span class="ruby-keyword kw">else</span>
-148:         <span class="ruby-keyword kw">self</span>
-149:       <span class="ruby-keyword kw">end</span>
-150:     <span class="ruby-keyword kw">else</span>
-151:       <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
-152:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}.*(ed|edly|ing|ingly)$/</span>
-153:         <span class="ruby-identifier">w</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(ed|edly|ing|ingly)$/</span>, <span class="ruby-value str">''</span>)
-154:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(at|lb|iz)$/</span>
-155:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
-156:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/is$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">gb_english</span>
-157:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
-158:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::Double}$/</span>
-159:           <span class="ruby-identifier">w</span>.<span class="ruby-identifier">chop!</span>
-160:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">porter2_is_short_word?</span>
-161:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span>
-162:         <span class="ruby-keyword kw">end</span>
-163:       <span class="ruby-keyword kw">end</span>
-164:       <span class="ruby-identifier">w</span>
-165:     <span class="ruby-keyword kw">end</span>
-166:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 115</span>
+115:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1b</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+116:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
+117:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(eed|eedly)$/</span>
+118:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(eed|eedly)$/</span>, <span class="ruby-value str">'ee'</span>)
+119:       <span class="ruby-keyword kw">else</span>
+120:         <span class="ruby-keyword kw">self</span>
+121:       <span class="ruby-keyword kw">end</span>
+122:     <span class="ruby-keyword kw">else</span>
+123:       <span class="ruby-identifier">w</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
+124:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::V}.*(ed|edly|ing|ingly)$/</span>
+125:         <span class="ruby-identifier">w</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(ed|edly|ing|ingly)$/</span>, <span class="ruby-value str">''</span>)
+126:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(at|lb|iz)$/</span>
+127:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
+128:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/is$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">gb_english</span>
+129:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span> 
+130:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::Double}$/</span>
+131:           <span class="ruby-identifier">w</span>.<span class="ruby-identifier">chop!</span>
+132:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">porter2_is_short_word?</span>
+133:           <span class="ruby-identifier">w</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">'e'</span>
+134:         <span class="ruby-keyword kw">end</span>
+135:       <span class="ruby-keyword kw">end</span>
+136:       <span class="ruby-identifier">w</span>
+137:     <span class="ruby-keyword kw">end</span>
+138:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -812,14 +786,14 @@ not the first letter of the word.
 					<div class="method-source-code"
 						id="porter-step-c-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 171</span>
-171:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1c</span>
-172:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/.+#{Porter2::C}(y|Y)$/</span>
-173:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(y|Y)$/</span>, <span class="ruby-value str">'i'</span>)
-174:     <span class="ruby-keyword kw">else</span>
-175:       <span class="ruby-keyword kw">self</span>
-176:     <span class="ruby-keyword kw">end</span>
-177:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 143</span>
+143:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step1c</span>
+144:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/.+#{Porter2::C}(y|Y)$/</span>
+145:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/(y|Y)$/</span>, <span class="ruby-value str">'i'</span>)
+146:     <span class="ruby-keyword kw">else</span>
+147:       <span class="ruby-keyword kw">self</span>
+148:     <span class="ruby-keyword kw">end</span>
+149:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -863,29 +837,29 @@ cases in the procedure.)
 					<div class="method-source-code"
 						id="porter-step--source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 188</span>
-188:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-189:     <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
-190:     <span class="ruby-identifier">s2m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_2_MAPS</span>.<span class="ruby-identifier">dup</span>
-191:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
-192:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;iser&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
-193:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;isation&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
-194:     <span class="ruby-keyword kw">end</span>
-195:     <span class="ruby-identifier">step_2_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s2m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
-196:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_2_re</span>
-197:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span>
-198:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s2m</span>[<span class="ruby-node">$&amp;</span>])
-199:       <span class="ruby-keyword kw">else</span>
-200:         <span class="ruby-keyword kw">self</span>
-201:       <span class="ruby-keyword kw">end</span>
-202:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/li$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{Porter2::Valid_LI})li$/</span>
-203:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/li$/</span>, <span class="ruby-value str">''</span>)
-204:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ogi$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/logi$/</span>
-205:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ogi$/</span>, <span class="ruby-value str">'og'</span>)
-206:     <span class="ruby-keyword kw">else</span>
-207:       <span class="ruby-keyword kw">self</span>
-208:     <span class="ruby-keyword kw">end</span>
-209:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 160</span>
+160:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step2</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+161:     <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+162:     <span class="ruby-identifier">s2m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_2_MAPS</span>.<span class="ruby-identifier">dup</span>
+163:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+164:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;iser&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
+165:       <span class="ruby-identifier">s2m</span>[<span class="ruby-value str">&quot;isation&quot;</span>] = <span class="ruby-value str">&quot;ise&quot;</span>
+166:     <span class="ruby-keyword kw">end</span>
+167:     <span class="ruby-identifier">step_2_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s2m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+168:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_2_re</span>
+169:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span>
+170:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s2m</span>[<span class="ruby-node">$&amp;</span>])
+171:       <span class="ruby-keyword kw">else</span>
+172:         <span class="ruby-keyword kw">self</span>
+173:       <span class="ruby-keyword kw">end</span>
+174:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/li$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(#{Porter2::Valid_LI})li$/</span>
+175:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/li$/</span>, <span class="ruby-value str">''</span>)
+176:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ogi$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/logi$/</span>
+177:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ogi$/</span>, <span class="ruby-value str">'og'</span>)
+178:     <span class="ruby-keyword kw">else</span>
+179:       <span class="ruby-keyword kw">self</span>
+180:     <span class="ruby-keyword kw">end</span>
+181:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -927,24 +901,24 @@ with &#8216;al&#8217;, similarly to how &#8216;alize&#8217; is treated.)
 					<div class="method-source-code"
 						id="porter-step--source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 220</span>
-220:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-221:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span>
-222:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ative$/</span>, <span class="ruby-value str">''</span>)
-223:     <span class="ruby-keyword kw">else</span>
-224:       <span class="ruby-identifier">s3m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_3_MAPS</span>.<span class="ruby-identifier">dup</span>
-225:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
-226:         <span class="ruby-identifier">s3m</span>[<span class="ruby-value str">&quot;alise&quot;</span>] = <span class="ruby-value str">&quot;al&quot;</span>
-227:       <span class="ruby-keyword kw">end</span>
-228:       <span class="ruby-identifier">step_3_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s3m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
-229:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
-230:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_3_re</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span> 
-231:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s3m</span>[<span class="ruby-node">$&amp;</span>])
-232:       <span class="ruby-keyword kw">else</span>
-233:         <span class="ruby-keyword kw">self</span>
-234:       <span class="ruby-keyword kw">end</span>
-235:     <span class="ruby-keyword kw">end</span>
-236:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 192</span>
+192:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step3</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+193:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ative$/</span>
+194:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ative$/</span>, <span class="ruby-value str">''</span>)
+195:     <span class="ruby-keyword kw">else</span>
+196:       <span class="ruby-identifier">s3m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_3_MAPS</span>.<span class="ruby-identifier">dup</span>
+197:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+198:         <span class="ruby-identifier">s3m</span>[<span class="ruby-value str">&quot;alise&quot;</span>] = <span class="ruby-value str">&quot;al&quot;</span>
+199:       <span class="ruby-keyword kw">end</span>
+200:       <span class="ruby-identifier">step_3_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s3m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+201:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+202:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_3_re</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}$/</span> 
+203:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s3m</span>[<span class="ruby-node">$&amp;</span>])
+204:       <span class="ruby-keyword kw">else</span>
+205:         <span class="ruby-keyword kw">self</span>
+206:       <span class="ruby-keyword kw">end</span>
+207:     <span class="ruby-keyword kw">end</span>
+208:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -986,28 +960,28 @@ found.)
 					<div class="method-source-code"
 						id="porter-step--source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 246</span>
-246:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
-247:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ion$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(s|t)ion$/</span>
-248:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ion$/</span>, <span class="ruby-value str">''</span>)
-249:     <span class="ruby-keyword kw">else</span>
-250:       <span class="ruby-identifier">s4m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_4_MAPS</span>.<span class="ruby-identifier">dup</span>
-251:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
-252:         <span class="ruby-identifier">s4m</span>[<span class="ruby-value str">&quot;ise&quot;</span>] = <span class="ruby-value str">&quot;&quot;</span>
-253:       <span class="ruby-keyword kw">end</span>
-254:       <span class="ruby-identifier">step_4_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s4m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
-255:       <span class="ruby-identifier">r2</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span>
-256:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_4_re</span>
-257:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r2</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}/</span>
-258:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s4m</span>[<span class="ruby-node">$&amp;</span>])
-259:         <span class="ruby-keyword kw">else</span>
-260:           <span class="ruby-keyword kw">self</span>
-261:         <span class="ruby-keyword kw">end</span>
-262:       <span class="ruby-keyword kw">else</span>
-263:         <span class="ruby-keyword kw">self</span>
-264:       <span class="ruby-keyword kw">end</span>
-265:     <span class="ruby-keyword kw">end</span>
-266:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 218</span>
+218:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step4</span>(<span class="ruby-identifier">gb_english</span> = <span class="ruby-keyword kw">false</span>)
+219:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ion$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(s|t)ion$/</span>
+220:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ion$/</span>, <span class="ruby-value str">''</span>)
+221:     <span class="ruby-keyword kw">else</span>
+222:       <span class="ruby-identifier">s4m</span> = <span class="ruby-constant">Porter2</span><span class="ruby-operator">::</span><span class="ruby-constant">STEP_4_MAPS</span>.<span class="ruby-identifier">dup</span>
+223:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb_english</span>
+224:         <span class="ruby-identifier">s4m</span>[<span class="ruby-value str">&quot;ise&quot;</span>] = <span class="ruby-value str">&quot;&quot;</span>
+225:       <span class="ruby-keyword kw">end</span>
+226:       <span class="ruby-identifier">step_4_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(<span class="ruby-identifier">s4m</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;$&quot;</span>)})
+227:       <span class="ruby-identifier">r2</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span>
+228:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">step_4_re</span>
+229:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r2</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{$&amp;}/</span>
+230:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{$&amp;}$/</span>, <span class="ruby-identifier">s4m</span>[<span class="ruby-node">$&amp;</span>])
+231:         <span class="ruby-keyword kw">else</span>
+232:           <span class="ruby-keyword kw">self</span>
+233:         <span class="ruby-keyword kw">end</span>
+234:       <span class="ruby-keyword kw">else</span>
+235:         <span class="ruby-keyword kw">self</span>
+236:       <span class="ruby-keyword kw">end</span>
+237:     <span class="ruby-keyword kw">end</span>
+238:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -1051,21 +1025,21 @@ delete if in R2 and preceded by l
 					<div class="method-source-code"
 						id="porter-step--source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/porter2.rb, line 272</span>
-272:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step5</span>
-273:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ll$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/l$/</span>
-274:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ll$/</span>, <span class="ruby-value str">'l'</span>) 
-275:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> 
-276:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>) 
-277:     <span class="ruby-keyword kw">else</span>
-278:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
-279:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::SHORT_SYLLABLE}e$/</span>
-280:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>)
-281:       <span class="ruby-keyword kw">else</span>
-282:         <span class="ruby-keyword kw">self</span>
-283:       <span class="ruby-keyword kw">end</span>
-284:     <span class="ruby-keyword kw">end</span>
-285:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 244</span>
+244:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_step5</span>
+245:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/ll$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/l$/</span>
+246:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ll$/</span>, <span class="ruby-value str">'l'</span>) 
+247:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r2</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> 
+248:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>) 
+249:     <span class="ruby-keyword kw">else</span>
+250:       <span class="ruby-identifier">r1</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">porter2_r1</span>
+251:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/e$/</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/#{Porter2::SHORT_SYLLABLE}e$/</span>
+252:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/e$/</span>, <span class="ruby-value str">''</span>)
+253:       <span class="ruby-keyword kw">else</span>
+254:         <span class="ruby-keyword kw">self</span>
+255:       <span class="ruby-keyword kw">end</span>
+256:     <span class="ruby-keyword kw">end</span>
+257:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -1098,16 +1072,16 @@ Tidy up the word before we get down to the algorithm
 					<div class="method-source-code"
 						id="porter-tidy-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/porter2.rb, line 35</span>
-35:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_tidy</span>
-36:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>
-37:     
-38:     <span class="ruby-comment cmt"># map apostrophe-like characters to apostrophes</span>
-39:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/‘/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
-40:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/’/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
-41: 
-42:     <span class="ruby-identifier">preword</span>
-43:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/porter2_implementation.rb, line 7</span>
+ 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">porter2_tidy</span>
+ 8:     <span class="ruby-identifier">preword</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>
+ 9:     
+10:     <span class="ruby-comment cmt"># map apostrophe-like characters to apostrophes</span>
+11:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/‘/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
+12:     <span class="ruby-identifier">preword</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/’/</span>, <span class="ruby-value str">&quot;'&quot;</span>)
+13: 
+14:     <span class="ruby-identifier">preword</span>
+15:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

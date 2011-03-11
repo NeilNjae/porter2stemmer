@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: Readme.rdoc [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./Readme_rdoc.html">Readme.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Porter2.html">Porter2</a></li>
+				
+					<li><a href="./String.html">String</a></li>
+				
+					<li><a href="./TestPorter2.html">TestPorter2</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h2>The Porter 2 stemmer</h2>
+<p>
+This is the Porter 2 stemming algorithm, as described at  <a
+href="http://snowball.tartarus.org/algorithms/english/stemmer.html">snowball.tartarus.org/algorithms/english/stemmer.html</a>
+The original paper is:
+</p>
+<p>
+Porter, 1980, &#8220;An algorithm for suffix stripping&#8221;,
+<em>Program</em>, Vol. 14, no. 3, pp 130-137
+</p>
+<h2>Features of this implementation</h2>
+<p>
+This stemmer is written in pure Ruby, making it easy to modify for language
+variants.  For instance, the original Porter stemmer only works for
+American English and does not recognise British English&#8217;s
+&#8217;-ise&#8217; as an alternate spelling of &#8217;-ize&#8217;. This 
+implementation has been extended to handle correctly British English.
+</p>
+<p>
+This stemmer also features a comprehensive test set of over 29,000 words,
+taken from the  <a
+href="http://snowball.tartarus.org/algorithms/english/stemmer.html">Porter
+2 stemmer website</a>.
+</p>
+<h2>Files</h2>
+<p>
+Constants for the stemmer are in the <a href="Porter2.html">Porter2</a>
+module.
+</p>
+<p>
+Procedures that implement the stemmer are added to the <a
+href="String.html">String</a> class.
+</p>
+<p>
+The stemmer algorithm is implemented in the <a
+href="String.html#method-i-porter2_stem">String#porter2_stem</a> procedure.
+</p>
+<h2>Internationalisation</h2>
+<p>
+There isn&#8217;t much, as this is a stemmer that only works for English.
+</p>
+<p>
+The <tt>gb_english</tt> flag to the various procedures allows the stemmer
+to treat the British  English &#8217;-ise&#8217; the same as the American
+English &#8217;-ize&#8217;.
+</p>
+<h2>Longest suffixes</h2>
+<p>
+Several places in the algorithm require matching the longest suffix of a
+word. The  regexp engine in Ruby 1.9 seems to handle alterntives in regexps
+by finding the  alternative that matches at the first position in the
+string. As we&#8217;re only talking  about suffixes, that first match is
+also the longest suffix. If the regexp engine changes, this behaviour may
+change and break the stemmer.
+</p>
+<h2>Usage</h2>
+<p>
+Call the <a
+href="String.html#method-i-porter2_stem">String#porter2_stem</a> or <a
+href="String.html#method-i-stem">String#stem</a> methods on a string to
+return its stem
+</p>
+<pre>
+ &quot;consistency&quot;.stem       # =&gt; &quot;consist&quot;
+ &quot;knitting&quot;.stem          # =&gt; &quot;knit&quot;
+ &quot;articulated&quot;.stem       # =&gt; &quot;articul&quot;
+ &quot;nationalize&quot;.stem       # =&gt; &quot;nation&quot;
+ &quot;nationalise&quot;.stem       # =&gt; &quot;nationalis&quot;
+ &quot;nationalise&quot;.stem(true) # =&gt; &quot;nation&quot;
+</pre>
+<h2>Author</h2>
+<p>
+The Porter 2 stemming algorithm was developed by  <a
+href="http://snowball.tartarus.org/algorithms/english/stemmer.html">Martin
+Porter</a>.  This implementation is by <a href="http://www.njae.me.uk">Neil
+Smith</a>.
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: Porter2</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./lib/porter2_constants_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/porter2_constants.rb">lib/porter2_constants.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./Readme_rdoc.html">Readme.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Porter2.html">Porter2</a></li>
+				
+					<li><a href="./String.html">String</a></li>
+				
+					<li><a href="./TestPorter2.html">TestPorter2</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">Porter2</h1>
+
+		<div id="description">
+			<p>
+Constants for the Porter 2 stemmer
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="C">C</a></dt>
+				
+				<dd class="description"><p>
+A non-vowel
+</p></dd>
+				
+			
+				<dt><a name="V">V</a></dt>
+				
+				<dd class="description"><p>
+A vowel: a e i o u y
+</p></dd>
+				
+			
+				<dt><a name="CW">CW</a></dt>
+				
+				<dd class="description"><p>
+A non-vowel other than w, x, or Y
+</p></dd>
+				
+			
+				<dt><a name="Double">Double</a></dt>
+				
+				<dd class="description"><p>
+Doubles created when adding a suffix: these are undoubled when stemmed
+</p></dd>
+				
+			
+				<dt><a name="Valid_LI">Valid_LI</a></dt>
+				
+				<dd class="description"><p>
+A valid letter that can come before &#8216;li&#8217; (or &#8216;ly&#8217;)
+</p></dd>
+				
+			
+				<dt><a name="SHORT_SYLLABLE">SHORT_SYLLABLE</a></dt>
+				
+				<dd class="description"><p>
+A specification for a short syllable.
+</p>
+<p>
+A short syllable in a word is either: 
+</p>
+<ol>
+<li><p>
+a vowel followed by a non-vowel other than w, x or Y and preceded by a
+non-vowel, or 
+</p>
+</li>
+<li><p>
+a vowel at the beginning of the word followed by a non-vowel.
+</p>
+</li>
+</ol>
+<p>
+(The original document is silent on whether sequences of two or more
+non-vowels make a syllable long. But as this specification is only used to
+find sequences of non-vowel - vowel - non-vowel - end-of-word, this
+ambiguity does not have an effect.)
+</p></dd>
+				
+			
+				<dt><a name="STEP_2_MAPS">STEP_2_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in porter2_step2. (ogi, li endings dealt with
+in procedure)
+</p></dd>
+				
+			
+				<dt><a name="STEP_3_MAPS">STEP_3_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in porter2_step3. (ative ending dealt with in
+procedure)  
+</p></dd>
+				
+			
+				<dt><a name="STEP_4_MAPS">STEP_4_MAPS</a></dt>
+				
+				<dd class="description"><p>
+Suffix transformations used in porter2_step4. (ion ending dealt with in
+procedure)
+</p></dd>
+				
+			
+				<dt><a name="SPECIAL_CASES">SPECIAL_CASES</a></dt>
+				
+				<dd class="description"><p>
+Special-case stemmings 
+</p></dd>
+				
+			
+				<dt><a name="STEP_1A_SPECIAL_CASES">STEP_1A_SPECIAL_CASES</a></dt>
+				
+				<dd class="description"><p>
+Special case words to stop processing after step 1a.
+</p></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

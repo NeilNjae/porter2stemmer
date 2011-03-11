@@ -1,6 +1,8 @@
-Fri, 07 Jan 2011 08:46:50 +0000
+Fri, 11 Feb 2011 13:56:05 +0000
 ./test/tc_porter2_parts.rb	Wed, 05 Jan 2011 11:38:33 +0000
 ./test/ts_porter2.rb	Mon, 03 Jan 2011 00:20:11 +0000
 ./test/tc_porter2_full.rb	Wed, 05 Jan 2011 11:35:59 +0000
-./lib/porter2.rb	Fri, 07 Jan 2011 08:46:31 +0000
-./lib/porter2_constants.rb	Fri, 07 Jan 2011 08:46:16 +0000
+./lib/porter2.rb	Sun, 09 Jan 2011 18:34:08 +0000
+./lib/porter2_constants.rb	Sun, 09 Jan 2011 09:20:05 +0000
+./lib/porter2_implementation.rb	Sat, 08 Jan 2011 10:20:57 +0000
+./Readme.rdoc	Fri, 11 Feb 2011 13:55:53 +0000
