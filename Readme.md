@@ -15,7 +15,7 @@ not recognise British English's '-ise' as an alternate spelling of '-ize'. This
 implementation has been extended to handle correctly British English.
 
 This stemmer also features a comprehensive test set of over 29,000 words, taken from the 
-{Porter 2 stemmer website}[http://snowball.tartarus.org/algorithms/english/stemmer.html].
+[Porter 2 stemmer website](http://snowball.tartarus.org/algorithms/english/stemmer.html).
 
 Files
 =====
