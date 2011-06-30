@@ -15,8 +15,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "porter2stemmer"
   gem.homepage = "http://github.com/NeilNjae/porter2stemmer"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A pure Ruby implementation of the Porter 2 stemmer}
+  gem.description = %Q{This is the Porter 2 stemming algorithm, as described at 
+http://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes from English words, revealing something closer to the stem of the word. For instance "acknowledgments".stem => "acknowledg".}
   gem.email = "neil.github@njae.me.uk"
   gem.authors = ["Neil Smith"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
