@@ -1,250 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <title>Module: Porter2</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <meta http-equiv="Content-Script-Type" content="text/javascript" />
-  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
-  <script type="text/javascript">
-  // <![CDATA[
-
-  function popupCode( url ) {
-    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
-  }
-
-  function toggleCode( id ) {
-    if ( document.getElementById )
-      elem = document.getElementById( id );
-    else if ( document.all )
-      elem = eval( "document.all." + id );
-    else
-      return false;
-
-    elemStyle = elem.style;
-    
-    if ( elemStyle.display != "block" ) {
-      elemStyle.display = "block"
-    } else {
-      elemStyle.display = "none"
-    }
-
-    return true;
-  }
-  
-  // Make codeblocks hidden by default
-  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
-  
-  // ]]>
-  </script>
-
-</head>
-<body>
-
-
-
-    <div id="classHeader">
-        <table class="header-table">
-        <tr class="top-aligned-row">
-          <td><strong>Module</strong></td>
-          <td class="class-name-in-header">Porter2</td>
-        </tr>
-        <tr class="top-aligned-row">
-            <td><strong>In:</strong></td>
-            <td>
-                <a href="../files/lib/porter2stemmer/constants_rb.html">
-                lib/porter2stemmer/constants.rb
-                </a>
-        <br />
-            </td>
-        </tr>
-
-        </table>
-    </div>
-  <!-- banner header -->
-
-  <div id="bodyContent">
-
-
-
-  <div id="contextContent">
-
-    <div id="description">
-      <p>
-Constants for the Porter 2 stemmer
-</p>
-
-    </div>
-
-
-   </div>
-
-
-  </div>
-
-
-    <!-- if includes -->
-
-    <div id="section">
-
-
-    <div id="constants-list">
-      <h3 class="section-bar">Constants</h3>
-
-      <div class="name-list">
-        <table summary="Constants">
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">C</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;[^aeiouy]&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-A non-vowel
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">V</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;[aeiouy]&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-A vowel: a e i o u y
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">CW</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;[^aeiouywxY]&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-A non-vowel other than w, x, or Y
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">Double</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;(bb|dd|ff|gg|mm|nn|pp|rr|tt)&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Doubles created when adding a suffix: these are undoubled when stemmed
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">Valid_LI</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;[cdeghkmnrt]&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-A valid letter that can come before &#8216;li&#8217; (or &#8216;ly&#8217;)
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">SHORT_SYLLABLE</td>
-          <td>=</td>
-          <td class="context-item-value">&quot;((#{C}#{V}#{CW})|(^#{V}#{C}))&quot;</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-A specification for a short syllable.
-
-<p>
-A short syllable in a word is either:
-</p>
-<ol>
-<li>a vowel followed by a non-vowel other than w, x or Y and preceded by a
-non-vowel, or
-
-</li>
-<li>a vowel at the beginning of the word followed by a non-vowel.
-
-</li>
-</ol>
-<p>
-(The original document is silent on whether sequences of two or more
-non-vowels make a syllable long. But as this specification is only used to
-find sequences of non-vowel - vowel - non-vowel - end-of-word, this
-ambiguity does not have an effect.)
-</p>
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">STEP_2_MAPS</td>
-          <td>=</td>
-          <td class="context-item-value">{&quot;tional&quot; =&gt; &quot;tion&quot;,                  &quot;enci&quot; =&gt; &quot;ence&quot;,                  &quot;anci&quot; =&gt; &quot;ance&quot;,                  &quot;abli&quot; =&gt; &quot;able&quot;,                  &quot;entli&quot; =&gt; &quot;ent&quot;,                  &quot;ization&quot; =&gt; &quot;ize&quot;,                  &quot;izer&quot; =&gt; &quot;ize&quot;,                  &quot;ational&quot; =&gt; &quot;ate&quot;,                  &quot;ation&quot; =&gt; &quot;ate&quot;,                  &quot;ator&quot; =&gt; &quot;ate&quot;,                  &quot;alism&quot; =&gt; &quot;al&quot;,                  &quot;aliti&quot; =&gt; &quot;al&quot;,                  &quot;alli&quot; =&gt; &quot;al&quot;,                  &quot;fulness&quot; =&gt; &quot;ful&quot;,                  &quot;ousli&quot; =&gt; &quot;ous&quot;,                  &quot;ousness&quot; =&gt; &quot;ous&quot;,                  &quot;iveness&quot; =&gt; &quot;ive&quot;,                  &quot;iviti&quot; =&gt; &quot;ive&quot;,                  &quot;biliti&quot; =&gt; &quot;ble&quot;,                  &quot;bli&quot; =&gt; &quot;ble&quot;,                  &quot;fulli&quot; =&gt; &quot;ful&quot;,                  &quot;lessli&quot; =&gt; &quot;less&quot; }</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Suffix transformations used in porter2_step2. (ogi, li endings dealt with
-in procedure)
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">STEP_3_MAPS</td>
-          <td>=</td>
-          <td class="context-item-value">{&quot;tional&quot; =&gt; &quot;tion&quot;,                  &quot;ational&quot; =&gt; &quot;ate&quot;,                  &quot;alize&quot; =&gt; &quot;al&quot;,                  &quot;icate&quot; =&gt; &quot;ic&quot;,                  &quot;iciti&quot; =&gt; &quot;ic&quot;,                  &quot;ical&quot; =&gt; &quot;ic&quot;,                  &quot;ful&quot; =&gt; &quot;&quot;,                  &quot;ness&quot; =&gt; &quot;&quot; }</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Suffix transformations used in porter2_step3. (ative ending dealt with in
-procedure)
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">STEP_4_MAPS</td>
-          <td>=</td>
-          <td class="context-item-value">{&quot;al&quot; =&gt; &quot;&quot;,                  &quot;ance&quot; =&gt; &quot;&quot;,                  &quot;ence&quot; =&gt; &quot;&quot;,                  &quot;er&quot; =&gt; &quot;&quot;,                  &quot;ic&quot; =&gt; &quot;&quot;,                  &quot;able&quot; =&gt; &quot;&quot;,                  &quot;ible&quot; =&gt; &quot;&quot;,                  &quot;ant&quot; =&gt; &quot;&quot;,                  &quot;ement&quot; =&gt; &quot;&quot;,                  &quot;ment&quot; =&gt; &quot;&quot;,                  &quot;ent&quot; =&gt; &quot;&quot;,                  &quot;ism&quot; =&gt; &quot;&quot;,                  &quot;ate&quot; =&gt; &quot;&quot;,                  &quot;iti&quot; =&gt; &quot;&quot;,                  &quot;ous&quot; =&gt; &quot;&quot;,                  &quot;ive&quot; =&gt; &quot;&quot;,                  &quot;ize&quot; =&gt; &quot;&quot; }</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Suffix transformations used in porter2_step4. (ion ending dealt with in
-procedure)
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">SPECIAL_CASES</td>
-          <td>=</td>
-          <td class="context-item-value">{&quot;skis&quot; =&gt; &quot;ski&quot;,                    &quot;skies&quot; =&gt; &quot;sky&quot;,                                         &quot;dying&quot; =&gt; &quot;die&quot;,                    &quot;lying&quot; =&gt; &quot;lie&quot;,                    &quot;tying&quot; =&gt; &quot;tie&quot;,                    &quot;idly&quot; =&gt;  &quot;idl&quot;,                    &quot;gently&quot; =&gt; &quot;gentl&quot;,                    &quot;ugly&quot; =&gt; &quot;ugli&quot;,                    &quot;early&quot; =&gt; &quot;earli&quot;,                    &quot;only&quot; =&gt; &quot;onli&quot;,                    &quot;singly&quot; =&gt;&quot;singl&quot;,                                         &quot;sky&quot; =&gt; &quot;sky&quot;,                    &quot;news&quot; =&gt; &quot;news&quot;,                    &quot;howe&quot; =&gt; &quot;howe&quot;,                    &quot;atlas&quot; =&gt; &quot;atlas&quot;,                    &quot;cosmos&quot; =&gt; &quot;cosmos&quot;,                    &quot;bias&quot; =&gt; &quot;bias&quot;,                    &quot;andes&quot; =&gt; &quot;andes&quot; }</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Special-case stemmings
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">STEP_1A_SPECIAL_CASES</td>
-          <td>=</td>
-          <td class="context-item-value">%w[ inning outing canning herring earring proceed exceed succeed ]</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-Special case words to stop processing after step 1a.
-
-</td>
-        </tr>
-        </table>
-      </div>
-    </div>
-
-
-
-      
-
-
-    <!-- if method_list -->
-
-
-  </div>
-
-
-<div id="validator-badges">
-  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-</div>
-
-</body>
-</html>
