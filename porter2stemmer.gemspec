@@ -4,15 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{porter2stemmer}
-  s.version = "1.0.0"
+  s.name = "porter2stemmer"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Neil Smith"]
-  s.date = %q{2011-06-30}
-  s.description = %q{This is the Porter 2 stemming algorithm, as described at 
-http://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes from English words, revealing something closer to the stem of the word. For instance "acknowledgments".stem => "acknowledg".}
-  s.email = %q{neil.github@njae.me.uk}
+  s.date = "2012-03-05"
+  s.description = "This is the Porter 2 stemming algorithm, as described at \nhttp://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes from English words, revealing something closer to the stem of the word. For instance \"acknowledgments\".stem => \"acknowledg\"."
+  s.email = "neil.github@njae.me.uk"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md",
@@ -30,6 +29,7 @@ http://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes
     "lib/porter2stemmer/constants.rb",
     "lib/porter2stemmer/implementation.rb",
     "pkg/porter2stemmer-1.0.0.gem",
+    "porter2stemmer.gemspec",
     "rdoc/Porter2.html",
     "rdoc/README_rdoc.html",
     "rdoc/String.html",
@@ -44,11 +44,11 @@ http://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes
     "test/test_porter2stemmer_full.rb",
     "test/test_porter2stemmer_parts.rb"
   ]
-  s.homepage = %q{http://github.com/NeilNjae/porter2stemmer}
+  s.homepage = "http://github.com/NeilNjae/porter2stemmer"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{A pure Ruby implementation of the Porter 2 stemmer}
+  s.rubygems_version = "1.8.16"
+  s.summary = "A pure Ruby implementation of the Porter 2 stemmer"
   s.test_files = [
     "test/helper.rb",
     "test/test_porter2stemmer.rb",
@@ -60,21 +60,15 @@ http://snowball.tartarus.org/algorithms/english/stemmer.html It removes suffixes
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-    s.add_dependency(%q<rcov>, [">= 0"])
   end
 end
 
