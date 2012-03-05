@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'bundle/setup'
+require 'bundler/setup'
 
 # ==The Porter 2 stemmer
 
